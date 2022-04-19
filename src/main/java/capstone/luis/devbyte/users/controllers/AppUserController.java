@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @RestController
 @RequestMapping("/api/user")
@@ -50,13 +51,13 @@ public class AppUserController {
     }
 
     @GetMapping("/account/posts")
-    public ResponseEntity<Page<Post>> getAccountPosts(@Valid Pagination pagination, BindingResult bindingResult){
+    public ResponseEntity<Page<Post>> getAccountPosts(@Valid Pagination pagination, BindingResult bindingResult, Principal principal){
         if (bindingResult.hasErrors()) {
             throw new InvalidDataSubmissionException("Pagination parameters are invalid.");
         }
 
-        // TODO: use principal
-        AppUser user = appUserService.getUserByUsername("username");
+        // TODO: apply to rest of methods
+        AppUser user = appUserService.getUserByUsername(principal.getName());
         return ResponseEntity.ok().body(postService.getPostsByUserId(user.getId(), pagination.getPage(), pagination.getCount()));
     }
 
