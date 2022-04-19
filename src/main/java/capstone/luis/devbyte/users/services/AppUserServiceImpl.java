@@ -42,6 +42,20 @@ public class AppUserServiceImpl implements AppUserService {
     @Override
     public AppUser registerAppUser(AppUser user) {
         //perform some checks to ensure unique
+        AppUser usernameExists = userRepository.findAppUserByUsername(user.getUsername());
+
+        if (usernameExists != null){
+            throw new RegistrationException("Account with username already exists");
+        }
+
+        AppUser emailExists = userRepository.findAppUserByEmail(user.getEmail());
+
+        if (emailExists != null) {
+            throw new RegistrationException("Account with email already exists");
+        }
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
         return updateAppUser(user);
     }
 
