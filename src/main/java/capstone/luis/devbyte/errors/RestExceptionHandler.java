@@ -78,4 +78,13 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         apiError.setMessage(e.getMessage());
         return buildResponseEntity(apiError);
     }
+
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ExceptionHandler(JWTVerificationErrorException.class)
+    protected ResponseEntity<Object> handleAuthHeaderVerification(JWTVerificationErrorException e){
+        ApiError apiError = new ApiError(FORBIDDEN);
+        apiError.setMessage(e.getMessage());
+        apiError.setDebugMessage(String.valueOf(e.getCause()));
+        return buildResponseEntity(apiError);
+    }
 }
