@@ -68,4 +68,12 @@ public class AppUserServiceImpl implements AppUserService {
     public void deleteAppUser(AppUser user) {
         userRepository.delete(user);
     }
+
+    @Override
+    public void addRoleToUser(String username, String roleName) {
+        AppUser user = getUserByUsername(username);
+        Role role = roleService.getByName(roleName);
+        user.getRoles().add(role);
+        updateAppUser(user);
+    }
 }
