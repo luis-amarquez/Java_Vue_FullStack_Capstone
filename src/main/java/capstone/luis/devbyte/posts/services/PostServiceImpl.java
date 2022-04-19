@@ -55,6 +55,15 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public Post getPostByIdAndUsername(long postId, String username) {
+        Post post = postRepository.findPostByIdAndUserUsername(postId, username);
+        if (post == null) {
+            throw new ModelEntityNotFoundException("Post does not exist");
+        }
+        return post;
+    }
+
+    @Override
     public Post createNewPost(Post post) {
         return postRepository.save(post);
     }

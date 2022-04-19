@@ -70,10 +70,10 @@ public class PostController {
         return ResponseEntity.ok().body(postService.getPostsByCategory(type, pagination.getPage(), pagination.getCount()));
     }
 
-    // get post with specified id
-    @GetMapping("/post/{id}")
-    public ResponseEntity<Post> getPost(@PathVariable(name = "id", required = true) long id) {
-        return ResponseEntity.ok().body(postService.getPostById(id));
+    // get post with specified id & user
+    @GetMapping("/post/{username}/{id}")
+    public ResponseEntity<Post> getPost(@PathVariable(name = "id", required = true) long id, @PathVariable(name = "username", required = true) String username) {
+        return ResponseEntity.ok().body(postService.getPostByIdAndUsername(id, username));
     }
 
     // delete existing post

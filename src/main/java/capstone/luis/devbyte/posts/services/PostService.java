@@ -14,8 +14,8 @@ public interface PostService {
     Page<Post> getPostsByCategory(String category, int pageNumber, int count);
     // fetch all the posts of the user page, after checking user exists
     Page<Post> getPostsByUserId(long userid, int pageNumber, int count);
-    // display post view and all its comments
     Post getPostById(long postId);
+    Post getPostByIdAndUsername(long postId, String username);
     // create post. automatically create date in backend, only create no update
     Post createNewPost(Post post);
     void deletePost(long postId, long userId);
