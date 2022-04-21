@@ -9,4 +9,5 @@ public interface AppUserService {
     AppUser updateAppUser(AppUser user);
     // delete account but only allow the user of the account
     void deleteAppUser(AppUser user);
+    void addRoleToUser(String username, String roleName);
 }

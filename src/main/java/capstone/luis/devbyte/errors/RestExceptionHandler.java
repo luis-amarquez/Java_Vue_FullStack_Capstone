@@ -1,8 +1,6 @@
 package capstone.luis.devbyte.errors;
 
-import capstone.luis.devbyte.errors.exceptions.InvalidDataSubmissionException;
-import capstone.luis.devbyte.errors.exceptions.ModelEntityNotFoundException;
-import capstone.luis.devbyte.errors.exceptions.UnauthorizedRequestException;
+import capstone.luis.devbyte.errors.exceptions.*;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
@@ -70,6 +68,23 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleInvalidDataSubmission(InvalidDataSubmissionException e){
         ApiError apiError = new ApiError(BAD_REQUEST);
         apiError.setMessage(e.getMessage());
+        return buildResponseEntity(apiError);
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(RegistrationException.class)
+    protected ResponseEntity<Object> handleRegistrationErrorSubmission(RegistrationException e){
+        ApiError apiError = new ApiError(BAD_REQUEST);
+        apiError.setMessage(e.getMessage());
+        return buildResponseEntity(apiError);
+    }
+
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ExceptionHandler(JWTVerificationErrorException.class)
+    protected ResponseEntity<Object> handleAuthHeaderVerification(JWTVerificationErrorException e){
+        ApiError apiError = new ApiError(FORBIDDEN);
+        apiError.setMessage(e.getMessage());
+        apiError.setDebugMessage(String.valueOf(e.getCause()));
         return buildResponseEntity(apiError);
     }
 }
