@@ -7,10 +7,25 @@ even an article.
 - [Daily Progress](#daily-progress)
 - [User Stories](#user-stories)
   - [AppUser](#appuser)
+  - [Posts](#post)
 - [Software Architecture](#software-architecture)
 - [Database Schema](#db-schema)
 
 ## Daily Progress
+![](https://progress-bar.dev/85?title=Completed&width=100)
+- April 22nd
+  - Completed the integration of post methods in the front end.
+    - Able to create new post and comment.
+    - Able to delete account from profile page.
+    - Able to delete posts and comments.
+  - Added automatic jwt `accessToken` refresh with `refreshToken` if `accessToken` request results in a 403
+  - Created 2 additional models
+    - `MessageRoom`
+    - `Message`
+    - Will be used for messaging
+  - Created repositories and service only files for models
+
+
 ![](https://progress-bar.dev/35?title=Completed&width=100)
 - April 15th
   - Initialized the Vue project to be used for the frontend.
