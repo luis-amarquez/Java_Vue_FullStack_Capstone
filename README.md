@@ -8,6 +8,7 @@ even an article.
 - [User Stories](#user-stories)
   - [AppUser](#appuser)
   - [Posts](#post)
+- [My Journey](#journey)
 - [Software Architecture](#software-architecture)
 - [Database Schema](#db-schema)
 
@@ -96,7 +97,25 @@ pretending to be me.
 
 ### Post
 - As a user, I want to be able to explore posts based on category so that I may discover something of interest.
-- As a user, I want to be able to view a profile so that I may see more posts and information from the user.
+- As a user, I want to be able to view a profile so that I may see more posts
+and information from the user.
+
+## Journey
+I have a very comfortable grasp with frontend and using Vue. I felt confident
+going into this using Vue as my main frontend technology. In terms of backend,
+I had a good strong base knowledge in backend as I had done a web internship and
+worked making my own personal projects with django in python. The big challenge for
+me, was definitely going to be tackling on Java and Java spring, Two completely new 
+technologies for me.
+
+When tackling authentication I decided to go with JWT as my previous knowledge
+taught me that it is the best use when having a frontend separate from the backend.
+
+Implementing JWT was definitely a big challenge and after successfully,
+implementing it, I gained more knowledge as to how exactly JWT works. Before,
+I had simply just used a python package that would do all the work for me but,
+with Java spring, I myself had to do what those python packages did for me.
+
 
 ## Software Architecture
 ![Software Architecture](./fullstack_architecture.png?raw=true)
