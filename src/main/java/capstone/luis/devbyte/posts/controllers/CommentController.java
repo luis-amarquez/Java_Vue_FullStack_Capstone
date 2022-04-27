@@ -18,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.security.Principal;
 import java.time.LocalDateTime;
 
 @RestController
@@ -36,13 +37,13 @@ public class CommentController {
 
     @PostMapping("/create")
     public ResponseEntity<Comment> createNewComment(@RequestBody @Valid CreateCommentDto commentDto,
-                                                    BindingResult bindingResult){
+                                                    BindingResult bindingResult,
+                                                    Principal principal){
         if (bindingResult.hasErrors()) {
             throw new InvalidDataSubmissionException("Unable to create new comment. Please ensure all fields are correct.");
         }
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/comment/create").toUriString());
-        // TODO: use principal to get user
-        AppUser user = appUserService.getUserByUsername("username");
+        AppUser user = appUserService.getUserByUsername(principal.getName());
 
         Post post = postService.getPostById(commentDto.getPostId());
         Comment comment = new Comment(commentDto.getComment(), LocalDateTime.now(), user, post);
@@ -50,9 +51,8 @@ public class CommentController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteCommentById(@PathVariable(name = "id") long commentId) {
-        // TODO: use principal to get user
-        AppUser user = appUserService.getUserByUsername("username");
+    public ResponseEntity<?> deleteCommentById(@PathVariable(name = "id") long commentId, Principal principal) {
+        AppUser user = appUserService.getUserByUsername(principal.getName());
         commentService.deleteComment(commentId, user.getId());
         return ResponseEntity.ok().build();
     }

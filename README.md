@@ -1,6 +1,6 @@
 ## DevByte (Developer Social Network)
-DevBytes is a social networking site similar to twitter. It offers multiples types of posts rather than just a single 
-type. You are able to create a post to express your thoughts, ask question, crack some jokes, share a code snippet, or 
+DevBytes is a social networking site similar to twitter. It offers multiples types of posts rather than just a single
+type. You are able to create a post to express your thoughts, ask question, crack some jokes, share a code snippet, or
 even an article.
 
 ## Contents
@@ -12,6 +12,20 @@ even an article.
 - [Database Schema](#db-schema)
 
 ## Daily Progress
+![](https://progress-bar.dev/92?title=Completed&width=100)
+- April 26th
+  - Added message view in the frontend that allows one to view a list of all
+  message rooms.
+  - Added chat view in the frontend that displays all the messages in a message
+  room and allows you to add a new message.
+  added the frontend code to allow for user to register.
+
+![](https://progress-bar.dev/90?title=Completed&width=100)
+- April 25th
+  - Implemented the service files.
+  - Created the controller for `Message` and `MessageRoom`
+  - Fixed bug when adding a new comment that would sometimes result in a 400
+
 ![](https://progress-bar.dev/85?title=Completed&width=100)
 - April 22nd
   - Completed the integration of post methods in the front end.
@@ -73,11 +87,11 @@ even an article.
 - As a user, I want to be able to log in with my credentials so that I can access logged-in features.
 - As a user, I want to be able to view all the posts I have created so that I can easily manage them from one place.
 - As a user, I want to be able to view all the comments I have made so that I can manage them all from one place.
-- As a user, I want to be able to create a new post so that I may share what's on my mind, a question, or any of the 
+- As a user, I want to be able to create a new post so that I may share what's on my mind, a question, or any of the
 other categories available.
 - As a user, I want to be able to add a comment to a post so that I may voice my thought on a post.
 - As a user, I want to be able to delete my account in case I decide I do not want to have an account anymore.
-- As a user, I want to be sure that all of my data is only accessible by myself so that no one else may post or comment 
+- As a user, I want to be sure that all of my data is only accessible by myself so that no one else may post or comment
 pretending to be me.
 
 ### Post
@@ -89,4 +103,3 @@ pretending to be me.
 
 ## DB Schema
 ![Maria DB schema](./db_schema.png?raw=true)
-

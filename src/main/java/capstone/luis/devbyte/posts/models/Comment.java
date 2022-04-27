@@ -2,6 +2,8 @@ package capstone.luis.devbyte.posts.models;
 
 import capstone.luis.devbyte.users.models.AppUser;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -11,13 +13,19 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(columnDefinition = "TEXT")
+
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String comment;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm")
     private LocalDateTime created;
-    @ManyToOne(targetEntity = AppUser.class, fetch = FetchType.EAGER)
+
+    @ManyToOne(targetEntity = AppUser.class, fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private AppUser user;
-    @ManyToOne(targetEntity = Post.class, fetch = FetchType.EAGER)
+
+    @ManyToOne(targetEntity = Post.class, fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Post post;
 
     public Comment() {

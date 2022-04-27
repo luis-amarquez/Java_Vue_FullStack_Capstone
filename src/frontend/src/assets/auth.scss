@@ -1,0 +1,40 @@
+#authModal {
+  .tabs {
+    width: 100%;
+
+    .tab {
+      width: 50%;
+
+      &:not(.tab-active) {
+        background-color: rgb(229 231 235);
+      }
+    }
+  }
+  .modal-content {
+    .auth-input {
+      @apply input w-full my-1 bg-gray-200 focus:bg-white;
+    }
+
+    .auth-button {
+      @apply btn btn-wide mt-1;
+    }
+  }
+}
+
+.auth-nav-button {
+  @apply flex items-center h-8 px-4 mr-2 text-xs font-medium rounded-full cursor-pointer;
+
+  &#login {
+    @apply text-gray-600 bg-gray-100;
+    &:hover {
+      @apply bg-gray-200;
+    }
+  }
+
+  &#signup {
+    @apply text-gray-100 lg:mr-0 bg-gray-900;
+    &:hover {
+      @apply bg-gray-800;
+    }
+  }
+}

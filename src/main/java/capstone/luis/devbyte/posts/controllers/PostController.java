@@ -17,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.security.Principal;
 import java.time.LocalDateTime;
 
 @RestController
@@ -35,14 +36,13 @@ public class PostController {
 
     // create new post
     @PostMapping("/create")
-    public ResponseEntity<Post> createNewPost(@RequestBody @Valid CreatePostDto createPostDto, BindingResult bindingResult) {
+    public ResponseEntity<Post> createNewPost(@RequestBody @Valid CreatePostDto createPostDto, BindingResult bindingResult, Principal principal) {
         if (bindingResult.hasErrors()){
             throw new InvalidDataSubmissionException("Unable to perform request. Pleas ensure all fields are valid.");
         }
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/posts/create").toUriString());
 
-        // TODO get the logged in user instead of a hard coded one
-        AppUser user = appUserService.getUserByUsername("username");
+        AppUser user = appUserService.getUserByUsername(principal.getName());
 
         Post post = convertToEntity(createPostDto, user);
         return ResponseEntity.created(uri).body(postService.createNewPost(post));
@@ -78,10 +78,10 @@ public class PostController {
 
     // delete existing post
     @DeleteMapping("/post/{id}")
-    public ResponseEntity<?> deletePost(@PathVariable(name = "id", required = true) long postId) {
+    public ResponseEntity<?> deletePost(@PathVariable(name = "id", required = true) long postId, Principal principal) {
 //        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/posts/delete").toUriString());
-        // TODO: load logged in user and pass user id instead of the hardcoded "1"
-        AppUser user = appUserService.getUserByUsername("username");
+
+        AppUser user = appUserService.getUserByUsername(principal.getName());
 
         postService.deletePost(postId, user.getId());
         return ResponseEntity.ok().build();

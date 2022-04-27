@@ -1,0 +1,66 @@
+@mixin desktop {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+#app {
+  @apply flex flex-col items-center justify-between min-h-screen xl:px-0 lg:px-5;
+
+  .main-container {
+    @apply relative mx-auto flex w-full max-w-6xl items-start pt-16;
+  }
+
+  .container-layout {
+    width: 100%;
+    height: calc(100vh - 4rem);
+
+    .main-content {
+      @apply flex flex-col;
+    }
+
+    @include desktop {
+      .main-content {
+        overflow: auto;
+        overflow-y: overlay !important;
+        >div {
+          @apply py-2;
+        }
+      }
+    }
+  }
+}
+
+.post-type {
+  @apply flex-1 w-auto px-2.5 font-medium h-12 relative flex items-center cursor-pointer justify-center;
+
+  &.router-link-exact-active {
+    @apply text-gray-700;
+  }
+
+  &:not(.router-link-exact-active) {
+    @apply opacity-70 text-gray-400;
+
+    &:hover {
+      @apply text-gray-700 opacity-100;
+
+      .hover-animation {
+        @apply w-full left-0;
+      }
+    }
+  }
+
+  .hover-animation {
+    @apply absolute transition-all ease-out duration-200 h-0.5 bottom-0 bg-gray-600 w-0 left-1/2;
+  }
+}
+
+.modal-content {
+  padding-top: 19px;
+  text-align: center;
+}
+
+.bottom-divider {
+  border-bottom-color: rgb(239 243 244);
+  border-bottom-width: 1px;
+}

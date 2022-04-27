@@ -1,0 +1,111 @@
+@mixin desktop {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: 640px) {
+    @content;
+  }
+}
+
+.posts-container {
+  position: relative;
+
+  a.post-card {
+    @apply flex flex-col cursor-pointer relative justify-between p-0 py-8 col-span-8 rounded-none px-4;
+
+    .post-top {
+      @apply relative rounded-none p-0;
+
+      >div {
+        display: flex;
+
+        .post-user {
+          @apply flex w-12 items-start space-x-3;
+
+          a {
+            flex-shrink: 0;
+
+            img {
+              @apply w-8 h-8 rounded-full;
+            }
+          }
+        }
+
+        .post-content-container {
+          @apply flex w-full flex-col justify-between;
+
+          .post-content {
+            @apply relative px-4;
+
+            .post-username {
+              @apply text-sm font-medium leading-none text-gray-900;
+
+              .post-date {
+                @apply text-xs text-gray-500;
+              }
+            }
+
+            .post-title {
+              @apply text-base font-medium leading-tight;
+            }
+
+            .post-user-content {
+              @apply inline-block mt-2 text-sm opacity-50;
+            }
+          }
+
+          @include mobile {
+            .post-content {
+              @apply px-0;
+
+              .post-user-content {
+                @apply text-sm;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .post-bottom {
+      @apply flex items-center justify-between rounded-none pt-4;
+
+      >div {
+        @apply flex w-full items-center justify-end;
+
+        .option {
+          margin-left: 0.5rem;
+
+          >div {
+            @apply relative flex items-center justify-center;
+
+            .option-button {
+              @apply relative flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-gray-100 bg-white px-3 py-1 text-gray-400;
+
+              &:hover {
+                @apply border-gray-200 bg-gray-100 text-gray-700;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    @include mobile {
+      .post-top {
+        @apply rounded-t-xl;
+      }
+      .post-bottom {
+        padding-left: 2.75rem;
+      }
+    }
+  }
+  @include desktop {
+    a.post-card {
+      padding: 1.5rem;
+    }
+  }
+}

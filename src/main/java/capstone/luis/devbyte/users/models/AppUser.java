@@ -1,6 +1,8 @@
 package capstone.luis.devbyte.users.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -10,20 +12,21 @@ public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(nullable = false, unique = true, length = 20)
     private String username;
     @JsonIgnore
+    @Column(nullable = false, unique = true, length = 100)
     private String email;
     @JsonIgnore
+    @Column(nullable = false)
     private String password;
+    @Column(nullable = false, length = 20)
     private String firstName;
+    @Column(nullable = false, length = 50)
     private String lastName;
 
     @JsonIgnore
-    @ManyToMany(targetEntity = AppUser.class, fetch = FetchType.EAGER)
-    private Set<AppUser> following;
-
-    @JsonIgnore
-    @ManyToMany(targetEntity = Role.class, fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = Role.class, fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     private Set<Role> roles;
 
     @Transient
@@ -78,14 +81,6 @@ public class AppUser {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public Set<AppUser> getFollowing() {
-        return following;
-    }
-
-    public void setFollowing(Set<AppUser> following) {
-        this.following = following;
     }
 
     public Set<Role> getRoles() {
